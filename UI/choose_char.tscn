@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=3 uid="uid://bt3mvrolwpdpg"]
+
+[ext_resource type="Script" path="res://UI/choose_char.gd" id="1_20a8m"]
+[ext_resource type="Texture2D" uid="uid://km5xgnxtr6dj" path="res://addons/tiny_swords/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="2_8uyto"]
+[ext_resource type="Texture2D" uid="uid://kogk6fltfrb1" path="res://addons/tiny_swords/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="3_nsmpq"]
+[ext_resource type="Texture2D" uid="uid://c8x80omyo30yx" path="res://addons/tiny_swords/Factions/Knights/Troops/Warrior/Yellow/Warrior_Yellow.png" id="4_mmyro"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_uopay"]
+font_size = 42
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0i44v"]
+atlas = ExtResource("2_8uyto")
+region = Rect2(432, 784, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tk5iy"]
+atlas = ExtResource("3_nsmpq")
+region = Rect2(432, 784, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ybr2"]
+atlas = ExtResource("4_mmyro")
+region = Rect2(432, 784, 96, 128)
+
+[node name="ChooseChar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_20a8m")
+texture1 = ExtResource("2_8uyto")
+texture2 = ExtResource("3_nsmpq")
+texture3 = ExtResource("4_mmyro")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.768627, 1, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 300
+
+[node name="Layout" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/Layout"]
+layout_mode = 2
+text = "Espadinha"
+label_settings = SubResource("LabelSettings_uopay")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/Layout"]
+layout_mode = 2
+text = "Escolha seu cavaleiro para começar a aventura!"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Texture1" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_0i44v")
+stretch_mode = 3
+
+[node name="Texture2" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_tk5iy")
+stretch_mode = 3
+
+[node name="Texture3" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_2ybr2")
+stretch_mode = 3
+
+[connection signal="pressed" from="HBoxContainer/Texture1" to="." method="_on_texture_1_pressed"]
+[connection signal="pressed" from="HBoxContainer/Texture2" to="." method="_on_texture_2_pressed"]
+[connection signal="pressed" from="HBoxContainer/Texture3" to="." method="_on_texture_3_pressed"]

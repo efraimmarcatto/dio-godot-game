@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://wx7116r1ulr3"]
+
+[ext_resource type="Script" path="res://test_scenes/test_remote_scene.gd" id="1_1boy4"]
+[ext_resource type="PackedScene" uid="uid://p6vq77i17jqe" path="res://player/player.tscn" id="1_8h5aa"]
+
+[node name="Test_remote_scene" type="Node2D"]
+script = ExtResource("1_1boy4")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("1_8h5aa")]
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

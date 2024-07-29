@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvm3oxl8u81rg"]
+
+[ext_resource type="Texture2D" uid="uid://dv2er2yo8q3r3" path="res://addons/tiny_swords/UI/Banners/Banner_Horizontal.png" id="1_34gti"]
+[ext_resource type="Script" path="res://UI/game_ui.gd" id="1_w05f1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cjtvm"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xuycf"]
+texture = ExtResource("1_34gti")
+texture_margin_left = 32.0
+texture_margin_top = 16.0
+texture_margin_right = 32.0
+texture_margin_bottom = 48.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(32, 48, 128, 128)
+
+[sub_resource type="LabelSettings" id="LabelSettings_u714i"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="GameUI" type="CanvasLayer"]
+script = ExtResource("1_w05f1")
+
+[node name="TimerLabel" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_right = 26.0
+offset_bottom = 28.0
+grow_horizontal = 2
+text = "00:00"
+label_settings = SubResource("LabelSettings_cjtvm")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 781.0
+offset_right = 1148.0
+offset_bottom = 76.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_xuycf")
+
+[node name="MeatLabel" type="Label" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -189.5
+offset_top = -59.0
+offset_right = -2.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "50 Meat"
+label_settings = SubResource("LabelSettings_u714i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoldLabel" type="Label" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2.5
+offset_top = -60.0
+offset_right = 190.5
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 0
+text = "20,000 Gold"
+horizontal_alignment = 1
+vertical_alignment = 1

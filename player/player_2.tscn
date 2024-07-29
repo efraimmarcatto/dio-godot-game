@@ -1,0 +1,184 @@
+[gd_scene load_steps=14 format=3 uid="uid://c8ju4ivryp6fe"]
+
+[ext_resource type="Script" path="res://player/player_2.gd" id="1_8dhek"]
+[ext_resource type="Texture2D" uid="uid://km5xgnxtr6dj" path="res://addons/tiny_swords/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="1_jyhnq"]
+[ext_resource type="PackedScene" uid="uid://6hp5bp2ic5p3" path="res://misc/skull.tscn" id="2_wrcpq"]
+
+[sub_resource type="Animation" id="Animation_q2jk4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackArea/CollisionShape:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_l60fn"]
+resource_name = "attack1"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackArea/CollisionShape:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:is_attacking")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_dgy81"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_2k1hp"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8cwyv"]
+_data = {
+"RESET": SubResource("Animation_q2jk4"),
+"attack1": SubResource("Animation_l60fn"),
+"idle": SubResource("Animation_dgy81"),
+"run": SubResource("Animation_2k1hp")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_61lk6"]
+radius = 20.0
+height = 62.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lpay"]
+size = Vector2(62, 108)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ed81"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6khh5"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x3sny"]
+radius = 38.0
+
+[node name="Player2" type="CharacterBody2D" groups=["player"]]
+motion_mode = 1
+script = ExtResource("1_8dhek")
+lerp_factor = 0.5
+death_body = ExtResource("2_wrcpq")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -37)
+texture = ExtResource("1_jyhnq")
+hframes = 6
+vframes = 8
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8cwyv")
+}
+autoplay = "idle"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -37)
+shape = SubResource("CapsuleShape2D_61lk6")
+
+[node name="AttackArea" type="Area2D" parent="."]
+position = Vector2(0, -37)
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(58, -13)
+shape = SubResource("RectangleShape2D_8lpay")
+disabled = true
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="HealthProgressBar" type="ProgressBar" parent="."]
+offset_left = -35.0
+offset_top = 8.0
+offset_right = 35.0
+offset_bottom = 17.0
+theme_override_styles/background = SubResource("StyleBoxFlat_2ed81")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6khh5")
+step = 1.0
+rounded = true
+show_percentage = false
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -37)
+shape = SubResource("CircleShape2D_x3sny")
+debug_color = Color(0.980392, 0, 0.00784314, 0.419608)
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
